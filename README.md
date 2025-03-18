@@ -1,14 +1,30 @@
+# 📁 File Management Server API  
+A lightweight and secure **file storage server** like Cloudinary, built with **Express.js, Multer, and MongoDB**. Easily **upload, read, update, and delete images** through a REST API with **API Key authentication**. All uploaded files return a **public URL**, accessible from any browser or app.
+
+---
+
+## 🚀 Features
+- 📤 Upload files and get a public URL
+- 📄 Read all uploaded files or specific file details
+- ✏️ Update uploaded files
+- ❌ Delete files
+- 🔐 API Key security
+- 🖼️ Access files remotely from any browser
+- 🗃️ MongoDB stores file metadata
+
+---
+
+## 🛠️ Tech Stack
+- Node.js
+- Express.js
+- Multer (File Uploads)
+- MongoDB + Mongoose
+- UUID (Unique filenames)
+- dotenv (Environment variables)
 
 📁 File Management Server API Documentation
 ===========================================
 
-✨ Features
-----------
-
-*   Upload files and get public URL
-*   Read, update, and delete files
-*   API Key secured endpoints
-*   Remote access via public URL
 
 🔐 API Key Authentication
 -------------------------
