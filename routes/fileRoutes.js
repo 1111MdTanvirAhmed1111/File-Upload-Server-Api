@@ -8,7 +8,7 @@ const File = require('../models/File');
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
+  destination: (req, file, cb) => cb(null, 'public/uploads/'),
   filename: (req, file, cb) => cb(null, uuidv4() + path.extname(file.originalname)),
 });
 
@@ -16,7 +16,7 @@ const upload = multer({ storage });
 
 router.post('/upload', upload.single('image'), async (req, res) => {
   const { file } = req;
-  const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+  const fileUrl = `${req.protocol}://${req.get('host')}/public/uploads/${file.filename}`;
   const newFile = new File({
     filename: file.filename,
     originalname: file.originalname,
@@ -43,10 +43,10 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   const oldFile = await File.findById(req.params.id);
   if (!oldFile) return res.status(404).json({ message: 'File not found' });
 
-  fs.unlinkSync(path.join(__dirname, '..', 'uploads', oldFile.filename));
+  fs.unlinkSync(path.join(__dirname, '..', 'public/uploads', oldFile.filename));
 
   const { file } = req;
-  const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+  const fileUrl = `${req.protocol}://${req.get('host')}/public/uploads/${file.filename}`;
   oldFile.filename = file.filename;
   oldFile.originalname = file.originalname;
   oldFile.mimetype = file.mimetype;
@@ -61,7 +61,7 @@ router.delete('/:id', async (req, res) => {
   const file = await File.findByIdAndDelete(req.params.id);
   if (!file) return res.status(404).json({ message: 'File not found' });
 
-  fs.unlinkSync(path.join(__dirname, '..', 'uploads', file.filename));
+  fs.unlinkSync(path.join(__dirname, '..', 'public/uploads', file.filename));
   res.json({ message: 'File deleted' });
 });
 
