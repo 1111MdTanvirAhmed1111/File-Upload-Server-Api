@@ -16,7 +16,7 @@ const upload = multer({ storage });
 
 router.post('/upload', upload.single('image'), async (req, res) => {
   const { file } = req;
-  const fileUrl = `${req.protocol}://${req.get('host')}/public/uploads/${file.filename}`;
+  const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
   const newFile = new File({
     filename: file.filename,
     originalname: file.originalname,
@@ -46,7 +46,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   fs.unlinkSync(path.join(__dirname, '..', 'public/uploads', oldFile.filename));
 
   const { file } = req;
-  const fileUrl = `${req.protocol}://${req.get('host')}/public/uploads/${file.filename}`;
+  const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
   oldFile.filename = file.filename;
   oldFile.originalname = file.originalname;
   oldFile.mimetype = file.mimetype;
